@@ -43,7 +43,7 @@ public class BinarySearchIn2DArray {
             return new int[] {0, result};
         }
         else {
-
+            return null;
         }
     }
 
