@@ -1,9 +1,5 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class BinarySearch {
 
     // Normal implementation -
@@ -182,8 +178,8 @@ public class BinarySearch {
     // in order to apply binary search you have to first rotate it right by k times and then search for target.
     // eg -  nums = [4,5,6,7,0,1,2], target = 0 [4, 5, 6, 7, 0, 1, 2]
 
-    /** My approach - its kind d of find mountain peak problem where the peak would be the highest element
-     * all the elements right to peak elemnts would come first in array and then the left side will come in order to get the sorted array
+    /** My approach - its kind of find mountain peak problem where the peak would be the highest element
+     * all the elements right to peak elements would come first in array and then the left side will come in order to get the sorted array
      * @param nums
      * @param target
      * @return
@@ -320,6 +316,7 @@ public class BinarySearch {
 
         }
 
+        return 0;
     }
 }
 
