@@ -1,8 +1,8 @@
-package org.example.recursion;
+package org.example.recursion.sorting;
 
 import java.util.Arrays;
 
-public class RecursionProblems3 {
+public class BubbleSortQuickSortRecursion {
     public static void main(String[] args){
        // pattern2(4,0);
         // pattern3(3,0);

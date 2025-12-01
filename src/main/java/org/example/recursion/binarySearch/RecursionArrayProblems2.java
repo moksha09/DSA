@@ -1,4 +1,4 @@
-package org.example.recursion;
+package org.example.recursion.binarySearch;
 
 import java.util.ArrayList;
 import java.util.List;
