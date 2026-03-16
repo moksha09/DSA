@@ -1,7 +1,6 @@
-package org.example.recursion.subsetsAndSubsequence;
+package org.example.recursion.subsetsAndSubsequence.subset;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SubsetsUsingIteration {

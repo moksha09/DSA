@@ -1,10 +1,10 @@
-package org.example.recursion.subsetsAndSubsequence.stringsSubsequenceQuestions;
+package org.example.recursion.subsetsAndSubsequence.subset;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SubsequenceOfStringWithDuplicateElements {
+public class SubsetWithDuplicateElementsUsingIteration {
 
     // my approach - this wont work  - {1,2,2) works but {2,1,2} doesnt work
     // in order to make it work we need the duplicates to be together - i.e we need to sort the array -

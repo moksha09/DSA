@@ -1,0 +1,24 @@
+1) Whats Thread Pool -
+-> A fixed number of worker threads + A queue of tasks
+
+2) Architecture -
+-> Tasks submitted
+          ↓
+      Task Queue
+          ↓
+   Worker Thread 1
+   Worker Thread 2
+   Worker Thread 3
+
+3) Workers repeatedly do:
+    - take task from queue
+    - execute task
+    - take next task
+
+4) A BlockingQueue is a queue that supports blocking operations.
+5) BLOCKING = The thread is paused (not using CPU) until something happens.
+    If queue empty → thread sleeps
+    If task arrives → thread wakes up
+
+6) A BlockingQueue automatically pauses worker threads when no tasks are available
+   and wakes them when tasks arrive, eliminating inefficient busy waiting.

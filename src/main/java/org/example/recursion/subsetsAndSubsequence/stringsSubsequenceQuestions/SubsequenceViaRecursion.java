@@ -1,4 +1,4 @@
-package org.example.recursion.subsetsAndSubsequence;
+package org.example.recursion.subsetsAndSubsequence.stringsSubsequenceQuestions;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class SubsequenceViaRecursion {
      * Example- You are given an array = [3,5,9] -> [3],[5],[9],[3,5],[5,9],[3,9],[3,5,9]
      * [a,b,c] - [a,b],[a,c],[b,c],[a],[b],[c],[a,b,c]
      *
-     * In any subset you see, you cn see that it may be taking some lement and ignoring a few element.
+     * In any subset you see, you can see that it may be taking some element and ignoring a few element.
      * THIS PATTERN OF IGNORING SOME ELEMENT AND IGNORING/REMOVING SOME ELEMENT IS KNOW AS SUBSET PATTERN - VERY IMPORTANT
      * SUBSETS ARE FOR ARRAYS AND SUBSEQUENCE ID FOR STRINGS
      */

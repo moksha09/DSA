@@ -1,0 +1,20 @@
+
+Race condition is a situation where -
+   - Two or more threads access  the same variable(s) (or data)
+     in a way that the final result stored in the variable
+     depends on how thread access to variables is scheduled.
+
+Race condition occurs when -
+   - Two or more threads read and write data to the same variable(s) concurrently.
+   - The thread access the variables using these patterns -
+        - Check then Act.
+        - Read Modify Write.
+                - where the modified value depends on the previously read value.
+   - The thread access to the variable(s) or data is not atomic.
+
+The part of the code where the race condition happens is called the critical section.
+    eg - count++ -> [ read + modify + write ] - multiple instructions
+The way to solve this is to make the critical section "atomic".
+"atomic" -> only 1 thread can execute within a critical section at a particular time.
+
+

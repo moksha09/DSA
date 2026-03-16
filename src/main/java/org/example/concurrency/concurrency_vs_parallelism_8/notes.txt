@@ -1,0 +1,9 @@
+1) Concurrency - Making progress on more than one task - seemingly at the same time.
+    g - single CPU - multiple threads
+
+2) The switching btw threads is so fast that it looks like the tasks are happening concurrently.
+
+3) The switching between one thread to another thread is called a - "context switch"
+
+4) Parallel Execution - Making progress on more than one task at the exact same time.
+    eg - multiple CPU's so multiple thread one on each CPU
