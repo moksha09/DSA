@@ -1,0 +1,7 @@
+1) The Java ExecutorService interface, java.util.concurrent.ExecutorService,
+ represents an asynchronous execution mechanism, essentially a thread pool,
+ which is capable of executing tasks concurrently in the background.
+
+2) Its a thread pool to which you can submit tasks for concurrent execution.
+
+3)

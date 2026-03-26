@@ -1,3 +1,55 @@
 JAVA LOCKS -
 1) The JAVA Lock interface represents a lock which can guard a critical section, so that only
 one thread can enter this critical section at a time.
+
+2) image - Thread1 locks the lock and enters the critical section, once its done it will unlock the lock and
+    then Thread2 can enter the critical section by locking the lock.
+         - While thread1 is locked, thread2 and thread3 will be blocked from trying to lock the lock
+
+3) The lock-unlock is written inside a try-finally block -> because lets say the operation
+that is executed after the lock throws an exception, then the lock,unlock will still get executed as
+its inside the final block.
+
+4) Reentrant lock - as the name suggest is a lock which a thread that has already locked a lock
+    can lock again and again and again .... as many times it needs. Once the thread is done with execution
+    it needs to unlock the reentrant lock instance as many times it locked it.
+
+5) Normal lock i.e lock which is not reentrant - cannot be locked again by the same thread.
+
+6) Re-entrance lockout - where threads who are trying to lock are blocked indefinitely
+
+7) A situation where the lock doesn't guarantee fairness among hte threads waiting to lock it can
+lead to a situation referred to as STARVATION. This could happen when there are a lot of threads waiting
+to lock one particular lock.
+
+8) We can prevent starvation by making a lock guarantee fairness among the threads waiting ot lock it.
+
+9) To make the reentrant lock guarantee fairness - pass "true" as parameter to reentrant lock constructor.
+10) by default its false;
+
+11) tryLock() will not respect any fairness in thread lock
+
+12) SYNCHRONIZED BLOCK VS LOCK -
+- Synchronized blocks must be contained in a single method.
+  lock.lock() and lock.unlock() can be called from different methods.
+
+- lock.lock() and lock.unlock() provide the same visibility and happens before guarantee as entering and exiting a synchronized block.
+
+- Synchronized blocks are always reentrant.
+  Lock could decide not to be.
+
+- Synchronized blocks cannot guarantee fairness,
+  Locks can.
+
+13) The Java Lock interface represents a concurrent lock which can make sure only one thread at a time can lock the
+  lock, perform its critical logic atomically, and unlock the lock again. A Java Lock is similar to a Java Synchronized
+  block, but is more flexible and has more features.
+
+  A Java Lock can be reentrant, meaning the same thread can lock the Lock more than one time.
+  The Lock must then be unlocked the same number of times before it is fully unlocked for other threads.
+
+  A Java Lock can guarantee fairness among threads waiting to lock the Lock, meaning the threads will be
+  guaranteed to be allowed to lock the Lock in the same sequence the threads called the Lock.lock() method.
+  This prevents the situation of starvation, where a waiting thread is never allowed to lock the Lock because
+  other threads keep "passing" it in the waiting queue.
+
