@@ -31,6 +31,33 @@ public class CircularLinkedList {
         size++;
     }
 
+    public void delete(int value){
+        Node temp = head;
+        if(temp == null){
+            return;
+        }
+        if(temp.value == value){
+            head = head.next;
+            tail.next = head;
+            return;
+        }
+        do {
+            Node n = temp.next;
+            if(n.value == value){
+                temp.next = n.next;
+                break;
+            }
+            temp = temp.next;
+        } while(temp != head);
+    }
+
+    public void deleteFirst(){
+        Node temp = head.next;
+        tail.next = temp;
+        head = temp;
+        size--;
+    }
+
 
     private class Node{
         private Node next;

@@ -1,6 +1,8 @@
 package org.example.linked_list;
 
 
+import org.example.linked_list.problems.RemoveDuplicatesFromSortedList_LC83;
+
 public class Main {
 
     public static void main(String[] args){
@@ -14,7 +16,8 @@ public class Main {
         linkedList.insertAtLast(99);
         linkedList.insertAtIndex(3,88);
         linkedList.removeAtIndex(3);
-        //linkedList.displaySinglyLinkedList();
+        linkedList.insertRec(2,77);
+        linkedList.displaySinglyLinkedList();
 
         // DOUBLY LINKED LIST
         DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
@@ -31,7 +34,11 @@ public class Main {
         circularLinkedList.insertAtFirst(3);
         circularLinkedList.insertAtFirst(2);
         circularLinkedList.insertAtFirst(1);
-        circularLinkedList.displayCLL();
+//        circularLinkedList.displayCLL();
+
+        // problems -
+
+
 
     }
 }
