@@ -1,0 +1,133 @@
+package org.example.dsa.trees;
+
+import java.util.Scanner;
+
+public class BinaryTree {
+
+    public class Node {
+        public int value;
+        public Node left;
+        public Node right;
+
+        public Node(int value){
+            this.value = value;
+        }
+        public int getValue(){
+            return this.value;
+        }
+    }
+
+    public BinaryTree(){
+
+    }
+
+    public Node root;
+
+    // insert elements -
+    public void populate(Scanner scanner){
+        System.out.println("Enter the root node value - ");
+        int value = scanner.nextInt();
+        root = new Node(value);
+        populate(scanner, root);
+    }
+
+    private void populate(Scanner scanner, Node node){
+        System.out.println("Do you want to enter left of "+node.value);
+        boolean left = scanner.nextBoolean();
+        if(left){
+            System.out.println("Enter the value of the left node - ");
+            int value = scanner.nextInt();
+            node.left = new Node(value);
+            populate(scanner, node.left);
+        }
+        System.out.println("Do you want to enter the right of "+ node.value);
+        boolean right = scanner.nextBoolean();
+        if(right){
+            System.out.println("Enter the value of the right node - ");
+            int value = scanner.nextInt();
+            node.right = new Node(value);
+            populate(scanner, node.right);
+        }
+    }
+
+    // display function -
+    public void display(){
+        display(root, "");
+    }
+
+    private void display(Node node, String indent){
+        if(node == null){
+            return;
+        }
+        System.out.println(indent + node.value);
+        display(node.left, indent + "\t");
+        display(node.right, indent + "\t");
+    }
+
+    // display in a pretty manner -
+    public void prettyDisplay(){
+        prettyDisplay(root, 0);
+    }
+
+    private void prettyDisplay(Node node, int level){
+        if(node == null){
+            return;
+        }
+        // rather than displaying hte root first we are going to display all the right node first
+        // so lets go to the right most element -
+        prettyDisplay(node.right, level+1);
+
+        if(level!=0){
+            for(int i=0; i<level-1; i++){
+                System.out.print("|\t\t");
+            }
+            System.out.println("|--------->" + node.value);
+        }else{
+            System.out.println(node.value);
+        }
+
+        // same for left -
+        prettyDisplay(node.left, level+1);
+
+    }
+
+    // pre-order -
+    public void preOrder(){
+        preOrder(root);
+    }
+
+    private void preOrder(Node node){
+        if(node==null) return;
+
+        System.out.println(node.value + " ");
+        preOrder(node.left);
+        preOrder(node.right);
+    }
+
+    // In order traversal -
+
+    public void inOrder(){
+        inOrder(root);
+    }
+
+    private void inOrder(Node node){
+        if(node == null) return;
+
+        inOrder(node.left);
+        System.out.println(node.value);
+        inOrder(node.right);
+    }
+
+    // post order -
+    public void postOrder(){
+        postOrder(root);
+    }
+
+    private void postOrder(Node node){
+        if(node == null) return;
+
+        postOrder(node.left);
+        postOrder(node.right);
+        System.out.println(node.value);
+    }
+}
