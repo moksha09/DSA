@@ -40,7 +40,6 @@ public class TopKFrequentElement {
         PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>(Map.Entry.comparingByValue());
         for(Map.Entry<Integer, Integer> entry : map.entrySet()){
             minHeap.offer(entry);
-
             if(minHeap.size()>k){
                 minHeap.poll();
             }
