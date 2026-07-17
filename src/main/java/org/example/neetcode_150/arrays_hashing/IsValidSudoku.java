@@ -1,8 +1,6 @@
 package org.example.neetcode_150.arrays_hashing;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 public class IsValidSudoku {
     public static boolean isValidSudoku(char[][] board) {
