@@ -1,0 +1,44 @@
+Notification & Alert Manager
+
+The Scenario -
+    You are building an alert system for an e-commerce platform.
+    When critical events occur (e.g., "Order Placed", "Payment Failed", "Security Alert"),
+    the system needs to send notifications to users.
+
+    Different users prefer different combinations of notification channels (Email, SMS, Slack, WhatsApp),
+    and some notifications require special processing before sending (such as encrypting sensitive data,
+    logging delivery attempts, or rate-limiting repeated alerts).
+
+System Requirements
+    1. Base Component Interface (Notifier)
+    Define an interface/abstract class Notifier with a core method:
+        send(message: string): void
+    Create a concrete component BasicEmailNotifier that serves as the default base notifier.
+    It simply prints or logs: Sending Email: <message>.
+
+    2. Decorators (Notification Channels)
+    Implement concrete decorators to extend notification delivery across multiple channels:
+        - SMSNotifierDecorator: Wraps a Notifier and also sends an SMS (Sending SMS: <message>).
+        - SlackNotifierDecorator: Wraps a Notifier and also posts to Slack (Sending Slack Message: <message>).
+        - WhatsAppNotifierDecorator: Wraps a Notifier and also sends a WhatsApp message (Sending WhatsApp: <message>).
+
+    3. Behavior Decorators (Processing Rules)
+    Implement decorators that modify or guard the message before delegating execution down the chain:
+        - EncryptionDecorator: Encrypts the message string (e.g., simple reversing or base64 encoding for testing)
+          before passing it to the wrapped notifier.
+        - LoggingDecorator: Logs a timestamped entry before and after calling the wrapped notifier's send() method.
+        - DeduplicationDecorator: Keeps track of recently sent messages. If the exact same message was sent within
+          the last 5 seconds, drop it and print [Suppressed Duplicate Alert].
+
+Execution Checklist
+    To ensure your implementation is rock-solid, test your code against these four test cases in your main() driver function:
+        - Basic Delivery: Send a standard email notification using just the BasicEmailNotifier.
+        - Multi-Channel Stack: Wrap the email notifier so that a single send() call delivers via Email + SMS + Slack.
+        - Behavior Stack: Send a critical alert that is Logged, Encrypted, and delivered via Email + WhatsApp.
+        - Order Matters Test: Stack EncryptionDecorator above SMSNotifierDecorator vs. below it.
+          Verify how changing the wrapping order changes which channels receive encrypted text vs. raw text.
+
+Key Questions to Consider While Coding -
+    - How does the BaseDecorator class help avoid repeating delegate code across SMSNotifierDecorator, SlackNotifierDecorator, etc.?
+    - Why does every decorator need to both inherit from Notifier AND hold a reference to a Notifier object?
+    - If you wrap a notifier as Logging(Encrypting(SMS(Email))), in what order do the operations actually execute?
