@@ -1,0 +1,62 @@
+Stock Market Real-Time Ticker & Analytics
+
+The Scenario -
+You are building the core engine for a financial trading platform.
+The platform receives live stock price updates from stock exchanges.
+Multiple independent dashboard components need to process this price data in real time:
+ - A Mobile Push Notification Unit that alerts users when a stock crosses a threshold.
+ - An Analytics Dashboard that tracks price history to calculate moving averages or session highs/lows.
+ - An Automated Trading Bot that executes a buy/sell trade when specific price conditions are met.
+ - The stock exchange feed shouldn't care about how many dashboards or bots exist, nor should it
+   break if a new analytics feature is added tomorrow!
+
+System Requirement -
+1. Subject Interface & Implementation (StockMarket / StockPublisher)
+Create a Subject interface (or abstract class) with standard methods:
+
+registerObserver(Observer o): void
+
+removeObserver(Observer o): void
+
+notifyObservers(): void
+
+Create a concrete class StockMarket that implements Subject:
+
+Main state: stockSymbol (e.g., "AAPL"), price (e.g., 185.50), and volume.
+
+Method setStockData(String symbol, double price, int volume): Updates state and automatically calls notifyObservers().
+
+2. Observer Interface (Observer)
+Define an Observer interface with a single update method:
+update(String symbol, double price, int volume): void
+
+3. Concrete Observers
+Implement three distinct concrete observers:
+ - MobileAlertObserver:
+    Constructor takes a target price threshold (e.g., $200.0).
+    On update(): Checks if the price exceeds its threshold.
+    If yes, prints: [ALERT] <symbol> crossed threshold! Current: $<price>.
+ - AnalyticsDashboardObserver:
+    Tracks historical prices received during the session.
+    On update(): Computes and prints the highest price seen so far and the average price.
+- TradingBotObserver:
+    Tracks state to avoid duplicate trades.
+    On update(): If price drops below $150.0, prints: [AUTO-TRADE] Buying 100 shares of <symbol> at $<price>.
+
+Execution Checklist -
+Test your system in your main() driver function against these scenarios:
+ - Multi-Observer Notification: Create a StockMarket instance for "AAPL", register all three observers,
+   and push 2–3 price updates (e.g., $180.0, $205.0, $145.0). Verify that all registered observers react accordingly.
+ - Dynamic Unregistration: Unregister the MobileAlertObserver dynamically using removeObserver().
+   Push another price update ($210.0) and verify that the mobile alert does not trigger,
+   while the Analytics Dashboard and Trading Bot still process the update.
+ - Multi-Stock Isolation (Bonus Challenge): Ensure your architecture can support registering an observer to a specific
+   stock rather than global updates, or handle multiple stock symbols cleanly without cross-talk.
+
+Key Design Considerations While Coding
+- Push vs. Pull Model: In the push model, notifyObservers() passes all new state data as arguments in update(...).
+  In the pull model, update() takes no state arguments, and observers call getter methods on the StockMarket reference directly.
+  Which one makes your code cleaner here?
+- Observer Memory Leaks: What happens if an observer is registered but never unregistered when no longer needed?
+  (This is known as the "Lapsed Listener Problem" in Java).
+- Thread Safety: If setStockData() is called from multiple threads, how should the List<Observer> be safely accessed or iterated over?
