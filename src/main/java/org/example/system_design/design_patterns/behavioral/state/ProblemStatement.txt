@@ -1,0 +1,40 @@
+E-Commerce Order Lifecycle Management -
+
+You are building the Core Fulfillment Engine for an e-commerce platform like Amazon.
+An Order moves through various stages of processing, and user/system actions behave
+differently depending on the order's current state.
+
+Core Requirements
+1) Order States:
+    - Created (Initial state when order is placed)
+    - Paid (Payment confirmed)
+    - Preparing (Warehouse picking and packing)
+    - Dispatched (Handed over to courier)
+    - Delivered (Customer received item)
+    - Cancelled (Terminal state)
+
+2) Standard Actions (OrderState Operations):
+    - pay()
+    - cancel()
+    - ship()
+    - deliver()
+
+3) Rules & Transitions:
+    - An order can only be paid when in Created.
+    - An order can be cancelled only when in Created, Paid, or Preparing.(Cancelling a Paid or Preparing order must trigger a refund process).
+    - Once Dispatched, an order cannot be cancelled directly.
+    - Delivered and Cancelled are terminal states (no further transitions allowed).
+
+SDE-2 Challenge Extensions (The Tricky Parts)
+Interviewers love adding constraints mid-interview to see if your design breaks. Make sure your design supports these cleanly:
+
+    Extension 1: Partial State Capabilities (The New Method Dilemma)
+                 Later, product demands a returnItem() operation and a trackShipment() operation.
+                  - returnItem() is ONLY valid when state is Delivered (within 14 days).
+                  - trackShipment() is ONLY valid when state is Dispatched.
+    Constraint: Do not pollute every single state class with dummy/empty implementations
+                if you can avoid it, or use an abstract base class/capability interfaces to handle them cleanly.
+
+    Extension 2: Context Data Mutability
+                 The Order (Context) maintains data like orderId, items, paymentDetails, and trackingNumber.
+                 - Executing ship() on Preparing state must require a valid trackingNumber to transition to Dispatched.
